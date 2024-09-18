@@ -1,0 +1,13 @@
+Name: Lawal Oladipupo
+Track: Backend
+-----------------------Assignment--------------
+What I learnt today:
+
+1. I learnt the differences, importance, and meaning of git and github.
+2. How to use git init to initialize a git repository.
+3. Using git add to add all files and track changes (git add.)
+4. How to use git commit -m "commit message" to commit my changes.
+5. How to use git log to view my history of git commits.
+6. How to use git add remote origin <the repository's url> to add my stuff to a remote repository.
+7. How to use git push origin <name of the branch i want to push to> to push my changes to the remote repository that was added.
+8. How to pull changes from a repository using git pull origin <the name of the branch i wan to pull from>
