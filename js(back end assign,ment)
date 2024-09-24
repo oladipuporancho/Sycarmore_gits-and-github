@@ -1,0 +1,47 @@
+//Question 1 - write a function createcounter() that uses closures to create a counter object with increment and decreement methods
+function createCounter() {
+    let count = 0; // The count is private and maintained within the closure
+
+    return {
+        increment: function() {
+            count++;
+            return count;
+        },
+        decrement: function() {
+            count--;
+            return count;
+        }
+    };
+}
+
+const counter = createCounter();
+console.log(counter.increment()); 
+console.log(counter.increment()); 
+console.log(counter.decrement()); 
+
+// Question 2-use map() to create a new array where each number from array [1,2,3,4,5] is multiplied by 3
+const numbers = [1, 2, 3, 4, 5];
+const multiplied_By_Three = numbers.map(number => number * 3);
+
+console.log(multiplied_By_Three); 
+
+//Question 3-use filter() to create a new array from [10,15,20,25,30] that only contains numbers greater than 20
+const numbers = [10, 15, 20, 25, 30];
+const greaterThanTwenty = numbers.filter(number => number > 20);
+
+console.log(greaterThanTwenty); 
+
+//Question 4- write a higher- order runtwice() that takes a function as an argument and runs it twice
+function runTwice(func) {
+    func();
+    func();
+}
+
+// Example usage:
+function sayHello() {
+    console.log("Hello!");
+}
+
+runTwice(sayHello);
+
+
