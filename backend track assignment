@@ -1,1 +1,129 @@
-const numbers = {5, 10, 15};
+// Question 1; Create a promise- based functionfetchweather() that simulates featching weather information for lagos. chain multiple .then() calls to process the result
+// Simulated fetchWeather function
+function fetchWeather() {
+    return new Promise((resolve, reject) => {
+        // Simulating an API call with a timeout
+        setTimeout(() => {
+            const weatherData = {
+                city: 'Lagos',
+                temperature: 30, // in Celsius
+                condition: 'Sunny',
+                humidity: 60, // in percentage
+            };
+
+            // Simulating successful fetch
+            resolve(weatherData);
+        }, 2000); // simulating a 2 seconds delay
+    });
+}
+
+// Using the fetchWeather function
+fetchWeather()
+    .then(weather => {
+        console.log(`Weather in ${weather.city}:`);
+        console.log(`Temperature: ${weather.temperature}°C`);
+        console.log(`Condition: ${weather.condition}`);
+        console.log(`Humidity: ${weather.humidity}%`);
+        return weather.temperature; // pass temperature to the next then
+    })
+    .then(temperature => {
+        if (temperature > 25) {
+            console.log('It\'s a warm day, consider wearing light clothes!');
+        } else {
+            console.log('It\'s a cool day, maybe wear a jacket.');
+        }
+    })
+    .catch(error => {
+        console.error('Error fetching weather data:', error);
+    });
+
+    //Question 2 rewrite the fetchweather() function using asnyc/await
+    // Simulated fetchWeather function
+function fetchWeather() {
+    return new Promise((resolve, reject) => {
+        // Simulating an API call with a timeout
+        setTimeout(() => {
+            const weatherData = {
+                city: 'Lagos',
+                temperature: 30, // in Celsius
+                condition: 'Sunny',
+                humidity: 60, // in percentage
+            };
+
+            // Simulating successful fetch
+            resolve(weatherData);
+        }, 2000); // simulating a 2 seconds delay
+    });
+}
+
+// Using async/await to handle fetchWeather
+async function getWeather() {
+    try {
+        const weather = await fetchWeather();
+        console.log(`Weather in ${weather.city}:`);
+        console.log(`Temperature: ${weather.temperature}°C`);
+        console.log(`Condition: ${weather.condition}`);
+        console.log(`Humidity: ${weather.humidity}%`);
+
+        if (weather.temperature > 25) {
+            console.log('It\'s a warm day, consider wearing light clothes!');
+        } else {
+            console.log('It\'s a cool day, maybe wear a jacket.');
+        }
+    } catch (error) {
+        console.error('Error fetching weather data:', error);
+    }
+}
+
+// Call the async function
+getWeather();
+ 
+//Queestion 3; Handle errors by rejecting the promise when the city is not "lagos" and using try....catch to catch the error
+// Simulated fetchWeather function
+function fetchWeather(city) {
+    return new Promise((resolve, reject) => {
+        // Simulating an API call with a timeout
+        setTimeout(() => {
+            if (city.toLowerCase() !== 'lagos') {
+                // Reject the promise if the city is not Lagos
+                reject(new Error('Weather data is only available for Lagos.'));
+            } else {
+                // Simulating weather data for Lagos
+                const weatherData = {
+                    city: 'Lagos',
+                    temperature: 30, // in Celsius
+                    condition: 'Sunny',
+                    humidity: 60, // in percentage
+                };
+
+                // Resolve the promise with weather data
+                resolve(weatherData);
+            }
+        }, 2000); // simulating a 2-second delay
+    });
+}
+
+// Using async/await to handle fetchWeather with error handling
+async function getWeather(city) {
+    try {
+        const weather = await fetchWeather(city);
+        console.log(`Weather in ${weather.city}:`);
+        console.log(`Temperature: ${weather.temperature}°C`);
+        console.log(`Condition: ${weather.condition}`);
+        console.log(`Humidity: ${weather.humidity}%`);
+
+        if (weather.temperature > 25) {
+            console.log('It\'s a warm day, consider wearing light clothes!');
+        } else {
+            console.log('It\'s a cool day, maybe wear a jacket.');
+        }
+    } catch (error) {
+        console.error('Error fetching weather data:', error.message);
+    }
+}
+
+// Call the async function with a valid city
+getWeather('Lagos');
+
+// Call the async function with an invalid city to trigger the error
+getWeather('Abuja');
