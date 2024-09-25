@@ -1,0 +1,76 @@
+//Question 1; Create a function that divides two numbers. Throw a custom erroe if the second number is zero
+// Function to divide two numbers
+function divideNumbers(a, b) {
+    if (b === 0) {
+        throw new Error('Division by zero is not allowed.');
+    }
+    return a / b;
+}
+
+// Example usage
+try {
+    let result = divideNumbers(10, 0); // This will throw an error
+    console.log(result);
+} catch (error) {
+    console.error('Error:', error.message);
+}
+
+// Question 2; write an async/ await function that simulates fetching data. Handle error if the data cannot be retrieved
+// Simulated fetchData function
+function fetchData() {
+    return new Promise((resolve, reject) => {
+        // Simulating a delay (e.g., API call)
+        setTimeout(() => {
+            const success = Math.random() > 0.5; // Randomly succeed or fail (50% chance)
+            
+            if (success) {
+                const data = { id: 1, name: "Sample Data" };
+                resolve(data); // Resolve with some data
+            } else {
+                reject(new Error('Failed to retrieve data.'));
+            }
+        }, 2000); // Simulate a 2-second delay
+    });
+}
+
+// Async function to fetch data
+async function getData() {
+    try {
+        const data = await fetchData();
+        console.log('Data retrieved successfully:', data);
+    } catch (error) {
+        console.error('Error:', error.message);
+    }
+}
+
+// Call the async function
+getData();
+
+// Question 3; Implement error handling using promises and .catch() to stimulate a network request
+// Simulated fetchData function
+function fetchData() {
+    return new Promise((resolve, reject) => {
+        // Simulating a network request with a delay
+        setTimeout(() => {
+            const success = Math.random() > 0.5; // 50% chance of success or failure
+            
+            if (success) {
+                const data = { id: 1, name: "Sample Data" };
+                resolve(data); // Resolve the promise with data
+            } else {
+                reject(new Error('Network request failed.')); // Reject with an error
+            }
+        }, 2000); // Simulate a 2-second delay
+    });
+}
+
+// Calling fetchData with promise-based error handling
+fetchData()
+    .then(data => {
+        console.log('Data retrieved successfully:', data);
+    })
+    .catch(error => {
+        console.error('Error:', error.message);
+    });
+
+
