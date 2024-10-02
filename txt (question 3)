@@ -1,0 +1,4 @@
+Compare the amount of code and simplicity between the node.js HTTP server and the  Express.js server
+
+Node.js HTTP server is good for small, simple applications but requires more boilerplate code to handle routing and responses.
+Express.js is much simpler and cleaner for creating servers, especially for larger applications. It reduces the amount of code significantly and adds more flexibility with its middleware and routing system.
