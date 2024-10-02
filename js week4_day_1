@@ -1,0 +1,31 @@
+// Question 1;set up a simple HTTP server using the built-in Node.js http module
+const http = require ("http")
+
+const server = http.createServer((req,res)=>{
+    res.writeHead(200,{"Content-Type":"text/plain"})
+    res.end("Hello,world")
+})
+
+server.listen(3000,()=>{
+    console.log("Server running on port 3000")
+})
+
+//Question 2
+const express = require("express")
+
+const app = express()
+
+app.get("/",(req,res)=>{
+    res.status(500).json({message:"Welcome To home"})
+})
+app.get("/about",(req,res)=>{
+    res.status(500).json({message:"In this section you will get to know about us"})
+})
+
+app.listen(3000,()=>{
+    console.log("Server is running on port 3000")
+})
+
+// Question 3; Compare the amount of code and simplicity between the node.js HTTP server and the  Express.js server
+//Node.js HTTP server is good for small, simple applications but requires more boilerplate code to handle routing and responses.
+//Express.js is much simpler and cleaner for creating servers, especially for larger applications. It reduces the amount of code significantly and adds more flexibility with its middleware and routing system.
