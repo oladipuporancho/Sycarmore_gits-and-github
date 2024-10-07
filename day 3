@@ -1,0 +1,44 @@
+const express = require('express');
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Custom logging middleware
+app.use((req, res, next) => {
+    console.log(`${req.method} ${req.url}`);
+    next();
+});
+
+// Middleware to parse JSON request bodies
+app.use(express.json());
+
+// Authentication middleware
+const authMiddleware = (req, res, next) => {
+    const authToken = req.headers['authorization'];
+
+    if (!authToken) {
+        return res.status(401).json({ message: 'Authorization token is missing.' });
+    }
+
+    // Basic token validation (you can replace this with more robust validation)
+    if (authToken !== 'Bearer your_token_here') {
+        return res.status(403).json({ message: 'Forbidden: Invalid token.' });
+    }
+
+    next();
+};
+
+// Protected route
+app.get('/dashboard', authMiddleware, (req, res) => {
+    res.json({ message: 'Welcome to the dashboard!' });
+});
+
+// Sample route for testing
+app.post('/data', (req, res) => {
+    res.json({ message: 'Data received!', data: req.body });
+});
+
+// Start the server
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+});

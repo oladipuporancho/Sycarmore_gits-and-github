@@ -1,0 +1,48 @@
+// 1. Create a basic Express server that:
+//• Logs every incoming request using a custom logging middleware.
+//• Uses express. json() to handle JSON request bodies.
+//• Protects a specific route (e.g., /dashboard) with authentication middleware that checks for an authorization token.
+
+const express = require('express');
+const app = express();
+
+// Custom logging middleware
+const requestLogger = (req, res, next) => {
+  console.log(`${req.method} ${req.url} - ${new Date().toISOString()}`);
+  next();
+};
+
+// Middleware to check for authorization token
+const authMiddleware = (req, res, next) => {
+  const authToken = req.headers['authorization'];
+
+  if (authToken && authToken === 'Bearer my-secret-token') {
+    next(); // Token is valid, proceed
+  } else {
+    res.status(401).json({ message: 'Unauthorized. Invalid token.' });
+  }
+};
+
+// Use the custom logger middleware
+app.use(requestLogger);
+
+// Use express.json() to handle JSON request bodies
+app.use(express.json());
+
+// Unprotected route
+app.get('/', (req, res) => {
+  res.send('Welcome to the home page!');
+});
+
+// Protected route
+app.get('/dashboard', authMiddleware, (req, res) => {
+  res.json({ message: 'Welcome to your dashboard!' });
+});
+
+// Start the server
+const PORT = 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
+
+//2. Test the server by making GET, POST, and PUT requests, and verify that the middleware is working correctly.
