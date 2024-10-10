@@ -1,0 +1,60 @@
+--Question 1: Create a table for products with fields for (id, (name, description, and price.
+CREATE TABLE Products (
+    id INT PRIMARY KEY AUTO_INCREMENT,      -- Unique product ID
+    name VARCHAR(100) NOT NULL,             -- Product name
+    description TEXT,                       -- Detailed product description
+    price DECIMAL(10, 2) NOT NULL           -- Product price (with two decimal places for cents)
+);
+
+-- Question 2. Write Node.js functions to:
+ --Insert a new product into the products table.
+ const mysql = require('mysql2');
+
+// Create a MySQL connection
+const connection = mysql.createConnection({
+  host: 'localhost',     --  MySQL host
+  user: 'rancho',          --  MySQL username
+  password: '123',          -- MySQL password
+  database: 'my_database'  -- database name
+});
+
+// Connect to the database
+connection.connect(err => {
+  if (err) throw err;
+  console.log('Connected to MySQL database.');
+});
+function insertProduct(venza, car, $11000) {
+  const sql = 'INSERT INTO Products (venza, car, $11000) VALUES (?, ?, ?)';
+  
+  connection.query(sql, [venza, car, $11000], (err, result) => {
+    if (err) throw err;
+    console.log('Product inserted:', result.insertId);
+  });
+}
+
+--Update the price of a product based on the id.
+function updateProductPrice(venza, $12000) {
+  const sql = 'UPDATE Products SET price = ? WHERE id = ?';
+
+  connection.query(sql, [$12000, id], (err, result) => {
+    if (err) throw err;
+    console.log(`Product with ID ${id} updated. Affected rows:`, result.affectedRows);
+  });
+}
+
+--Delete a product by 1d.
+function deleteProductById(venza) {
+  const sql = 'DELETE FROM Products WHERE id = ?';
+
+  connection.query(sql, [venza], (err, result) => {
+    if (err) throw err;
+    console.log(`Product with ID ${venza} deleted. Affected rows:`, result.affectedRows);
+  });
+}
+connection.end(err => {
+  if (err) throw err;
+  console.log('MySQL connection closed.');
+});
+
+
+
