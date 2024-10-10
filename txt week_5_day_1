@@ -1,0 +1,68 @@
+ Question 1: Choose two examples of applications, and decide which would benefit from a relational database and which would benefit from a NoSQL database. Explain your reasoning.
+ E-Commerce Website
+Type: Relational Database
+Reasoning: An e-commerce website handles structured data such as customer information, product catalogs, orders, and payments, which are often related and require transactions to be ACID-compliant (Atomicity, Consistency, Isolation, Durability). Relational databases, such as MySQL or PostgreSQL, are well-suited for handling this structured data with complex queries, enforcing data integrity, and supporting transactional requirements (e.g., ensuring payments are processed accurately). The structured nature of products, users, and orders makes it ideal for a relational database where schemas and relationships between entities are well-defined.
+
+Example 2: Social Media Application
+Type: NoSQL Database
+Reasoning: A social media platform needs to handle large amounts of unstructured or semi-structured data, such as user posts, comments, likes, and multimedia (photos, videos). The structure of the data is dynamic and can vary (e.g., different users have different types of content). Additionally, the app needs to scale horizontally to accommodate millions of users, requiring high performance and flexibility. NoSQL databases like MongoDB or Cassandra allow for faster reads/writes, can scale out easily, and can handle complex data that doesn’t fit neatly into relational tables, making it ideal for this use case.
+
+Question 2: Sketch out the database schema or document structure for both examples. One should follow the structure of a relational database, and the other should follow the document structure of a NoSQL database (e.g., MongoDB).
+
+Example 1: E-Commerce Website (Relational Database)
+Relational DB (E-Commerce): Well-structured tables with clear relationships, ideal for handling transactions and integrity.
+
+Tables:
+
+Users: Stores user info (user_id, name, email, etc.).
+Products: Stores product details (product_id, name, price, category_id).
+Categories: Stores product categories (category_id, category_name).
+Orders: Tracks orders (order_id, user_id, total_amount).
+Order_Items: Links products to orders (order_item_id, order_id, product_id).
+Payments: Tracks payment data (payment_id, order_id, amount).
+
+Example 2
+NoSQL DB (Social Media): Flexible, scalable, JSON-like documents, suited for handling dynamic, unstructured data.
+{
+  "_id": "rancho_10",
+  "first_name": "ola",
+  "last_name": "rancho",
+  "email": "john@example.com",
+  "friends": ["user456", "user789"],
+  "profile_picture": "https://example.com/profile.jpg",
+  "bio": "Love to travel!",
+  "posts": [
+    {
+      "_id": "post123",
+      "content": "Just got back from an amazing trip!",
+      "media": ["https://example.com/photo1.jpg", "https://example.com/photo2.jpg"],
+      "likes": 120,
+      "comments": [
+        {
+          "_id": "comment456",
+          "user_id": "ola123",
+          "comment": "Wow, looks amazing!",
+          "created_at": "2023-10-10T13:45:00Z"
+        },
+        {
+          "_id": "comment789",
+          "user_id": "user456",
+          "comment": "I want to visit too!",
+          "created_at": "2023-10-10T14:10:00Z"
+        }
+      ],
+      "created_at": "2023-10-10T12:34:56Z"
+    }
+  ],
+  "messages": [
+    {
+      "_id": "msg123",
+      "sender_id": "rancho_10",
+      "receiver_id": "ola123",
+      "message": "Hey, how are you?",
+      "created_at": "2023-10-10T16:00:00Z",
+      "status": "sent"
+    }
+  ]
+}
+
